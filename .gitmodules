@@ -1,0 +1,3 @@
+[submodule "podigg-lc"]
+	path = podigg-lc
+	url = ifigit@git.informatik.uni-leipzig.de:taelman/podigg-lc.git
