@@ -2,6 +2,7 @@ package org.hobbit.podigg;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.hobbit.core.Constants;
 import org.hobbit.core.components.AbstractComponent;
 import org.hobbit.core.components.AbstractDataGenerator;
 import org.hobbit.core.rabbit.SimpleFileSender;
@@ -16,11 +17,12 @@ import java.io.InputStream;
  */
 public class PodiggGenerator extends AbstractComponent {
 
-    public static final String QUEUE_NAME = "hobbit.podigg.queuename";
+    public static final String DEFAULT_QUEUE_NAME = "hobbit.podigg.queuename";
 
     @Override
     public void run() throws Exception {
-        SimpleFileSender sender = SimpleFileSender.create(this, QUEUE_NAME);
+        String queueName = System.getenv().getOrDefault(Constants.DATA_QUEUE_NAME_KEY, DEFAULT_QUEUE_NAME);
+        SimpleFileSender sender = SimpleFileSender.create(this, queueName);
 
         // Call the generator
         FileUtils.forceMkdir(new File("output_data"));
