@@ -2,18 +2,26 @@ package org.hobbit.podigg;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.hobbit.core.components.AbstractComponent;
 import org.hobbit.core.components.AbstractDataGenerator;
+import org.hobbit.core.rabbit.SimpleFileSender;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.InputStream;
 
 /**
  * Calls the podigg-lc generator.
  * @author Ruben Taelman (ruben.taelman@ugent.be)
  */
-public class PodiggGenerator extends AbstractDataGenerator {
+public class PodiggGenerator extends AbstractComponent {
+
+    public static final String QUEUE_NAME = "hobbit.podigg.queuename";
+
     @Override
-    protected void generateData() throws Exception {
+    public void run() throws Exception {
+        SimpleFileSender sender = SimpleFileSender.create(this, QUEUE_NAME);
+
         // Call the generator
         FileUtils.forceMkdir(new File("output_data"));
         String memory = System.getenv().getOrDefault("NODE_MEM", "2056");
@@ -23,8 +31,13 @@ public class PodiggGenerator extends AbstractDataGenerator {
         System.out.println(IOUtils.toString(process.getInputStream()));
 
         // Forward the output
-        byte[] data = IOUtils.toByteArray(new FileInputStream("output_data/lc.ttl"));
-        sendDataToSystemAdapter(data);
-        sendDataToTaskGenerator(data);
+        InputStream is = new FileInputStream("output_data/lc.ttl");
+        try {
+            sender.streamData(is, "lc.ttl");
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            IOUtils.closeQuietly(is);
+        }
     }
 }
