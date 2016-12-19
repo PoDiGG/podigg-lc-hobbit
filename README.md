@@ -2,6 +2,7 @@
 _POpulation DIstribution-based Gtfs Generator_
 
 A HOBBIT dataset generator wrapper for PoDiGG.
+More information on the usage of this mimicking algorithm is available at the [HOBBIT wiki](https://github.com/hobbit-project/platform/wiki/Transferring-mimicked-data).
 
 Make sure to clone this repo recursively to ensure that the submodule is downloaded:
 ```bash
