@@ -20,3 +20,9 @@ More information about this can be found at https://git.datasciencelab.ugent.be/
 
 For big data generation, the `NODE_MEM` environment variable can be overridden to increase the maximum memory usage.
 This can be done by adding the `-e NODE_MEM=<memory in MB>` option when running the Docker container.
+
+# License
+The PoDiGG generator is written by [Ruben Taelman](http://rubensworks.net/).
+
+This code is copyrighted by [Ghent University – imec](http://idlab.ugent.be/)
+and released under the [MIT license](http://opensource.org/licenses/MIT).
