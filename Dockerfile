@@ -4,7 +4,8 @@ FROM amineaffane/node-java
 RUN apt-get update && apt-get install -y libcairo2-dev libjpeg62-turbo-dev libpango1.0-dev libgif-dev build-essential g++
 
 # Add podigg-lc
-ADD podigg-lc /evalrun
+RUN git clone -n https://github.com/PoDiGG/podigg-lc.git /evalrun
+RUN cd /evalrun && git checkout ce14a0b5aabcb423bde0746e067b858e0ce75fa5
 RUN cd /evalrun && npm install
 
 # Add and build Java wrapper
