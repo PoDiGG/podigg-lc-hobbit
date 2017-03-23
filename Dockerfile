@@ -1,4 +1,4 @@
-FROM amineaffane/node-java
+FROM rubensworks/node-java
 
 # Node canvas requirements
 RUN apt-get update && apt-get install -y libcairo2-dev libjpeg62-turbo-dev libpango1.0-dev libgif-dev build-essential g++
@@ -18,3 +18,6 @@ RUN rm -rf /tmp/build
 WORKDIR /evalrun
 
 CMD java -cp podigg.jar org.hobbit.core.run.ComponentStarter org.hobbit.podigg.PodiggGenerator
+
+# For debugging
+#CMD java -cp podigg.jar org.hobbit.podigg.PodiggGenerator
