@@ -5,7 +5,7 @@ RUN apt-get update && apt-get install -y libcairo2-dev libjpeg62-turbo-dev libpa
 
 # Add podigg-lc
 RUN git clone -n https://github.com/PoDiGG/podigg-lc.git /evalrun
-RUN cd /evalrun && git checkout a25491e3e75fda574f5f39ddc6c48e0262ee8cd5
+RUN cd /evalrun && git checkout 41fc42b40915ef5905206bc4f9a2d41c07f81013
 RUN cd /evalrun && npm install
 
 # Add and build Java wrapper
